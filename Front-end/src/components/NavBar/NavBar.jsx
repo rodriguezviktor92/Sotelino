@@ -5,6 +5,7 @@ import s from "./NavBar.module.css";
 import { useState, useEffect, useRef } from "react";
 import { useLocalStorage } from "../../utils/customerHooks/useLocalStorage";
 import CartModal from "../CartModal/CartModal";
+import { HashLink } from "react-router-hash-link";
 
 export default function NavBar({ gallerySection, aboutSection }) {
   const [name, setName] = useLocalStorage("name", "");
@@ -68,30 +69,6 @@ export default function NavBar({ gallerySection, aboutSection }) {
     }
   }, [lastScrollY]);
 
-  /*   const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [visible, setVisible] = useState(true);
-
-  const handleScroll = () => {
-    // find current scroll position
-    console.log(window.pageYOffset);
-    const currentScrollPos = window.pageYOffset;
-    // set state based on location info (explained in more detail below)
-    setVisible(
-      (prevScrollPos > currentScrollPos &&
-        prevScrollPos - currentScrollPos > 70) ||
-        currentScrollPos < 10
-    );
-    // set state to new scroll position
-    setPrevScrollPos(currentScrollPos);
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos, visible, handleScroll]);
- */
-
   useEffect(() => {
     console.log("use efect navbar");
     if (localStorage.getItem("role") === "admin") {
@@ -128,25 +105,24 @@ export default function NavBar({ gallerySection, aboutSection }) {
             </Link>
           ) : null}
 
-          <Link
-            to={"/home#gallery"}
-            onClick={() => scrollToSection(gallerySection)}
+          <HashLink
+            smooth
+            to="/home#gallery"
             className="block mt-4 lg:inline-block lg:mt-0 text-gray-200
             	hover:text-white mr-12 pointer"
           >
             Obras
-          </Link>
+          </HashLink>
 
-          <Link
-            to={"/home#about"}
-            onClick={() => scrollToSection(aboutSection)}
+          <HashLink
+            smooth
+            to="/home#about"
             className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-12 pointer"
           >
             Sobre mi
-          </Link>
+          </HashLink>
           <Link
-            to={"/comentarios"}
-            onClick={() => scrollToSection(aboutSection)}
+            to="/comentarios"
             className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-12 pointer"
           >
             Comentarios
