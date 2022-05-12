@@ -3,7 +3,6 @@ import s from "./gallery.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  fetchPaints,
   filterByCategory,
   filterByPrice,
   getCategories,
@@ -14,13 +13,16 @@ import Cards from "../../components/Cards/Cards";
 import divider from "../../assets/divider.png";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
+import { fetchPaints } from "../../services/get/fetchPaints";
 
 const Gallery = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
   const [search, setSearch] = useState("");
-  const paints = useSelector((state) => state.filteredPaints);
+
+  const [galleryPaints, setGalleryPaints] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const scrollToEnd = () => {
     setCurrentPage(currentPage + 1);
@@ -35,15 +37,23 @@ const Gallery = () => {
     }
   };
 
-  let filterAviablePaints = paints.filter(
-    (paint) => paint.state === "Available"
-  );
-
   const [filter, setFilter] = useState(false);
 
   useEffect(() => {
-    if (currentPage !== 0 || paints.length === 0)
-      dispatch(fetchPaints(currentPage));
+    if (currentPage || !galleryPaints.length) {
+      setLoading(true);
+      //dispatch(fetchPaints(currentPage));
+      fetchPaints(currentPage)
+        .then((paints) => {
+          setGalleryPaints(galleryPaints.concat(paints.content));
+        })
+        .catch((error) => {
+          new Error(error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   }, [currentPage]);
 
   useEffect(() => {
@@ -107,8 +117,15 @@ const Gallery = () => {
           />
         </div>
 
-        <Cards cards={filterAviablePaints} />
+        <Cards cards={galleryPaints} />
+
+        {loading && (
+          <div class="flex justify-center items-center text-2xl">
+            Loading...
+          </div>
+        )}
       </div>
+
       <Footer />
     </>
   );
