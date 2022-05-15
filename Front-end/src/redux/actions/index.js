@@ -164,7 +164,7 @@ export function filterByPrice(price) {
   };
 }
 
-export function addToCart(idProduct) {
+export function addToCart(paint) {
   toast.success("Agregado al carrito", {
     position: "top-right",
     autoClose: 3000,
@@ -176,7 +176,7 @@ export function addToCart(idProduct) {
   });
   return {
     type: ADD_TO_CART,
-    payload: idProduct,
+    payload: paint,
   };
 }
 
@@ -187,7 +187,7 @@ export function addLocalStorage(cart) {
   };
 }
 
-export function removeToCart(idProduct) {
+export function removeToCart(product) {
   toast.error("Eliminado con éxito del carrito", {
     position: "top-right",
     autoClose: 3000,
@@ -199,7 +199,7 @@ export function removeToCart(idProduct) {
   });
   return {
     type: REMOVE_TO_CART,
-    payload: idProduct,
+    payload: product,
   };
 }
 export function cleanCart() {

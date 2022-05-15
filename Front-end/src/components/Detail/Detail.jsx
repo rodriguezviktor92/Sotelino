@@ -15,6 +15,7 @@ import { useMove } from "../../utils/customerHooks/useMove";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
+import { useCart } from "../../hook/useCart";
 
 const Detail = () => {
   const { x, y, handleMouseMove } = useMove();
@@ -33,24 +34,9 @@ const Detail = () => {
     dispatch(getDetail(id));
   }, []);
 
-  const resp = useSelector((state) => state.detail);
+  const product = useSelector((state) => state.detail);
 
-  const handleAddToCart = (idProduct) => {
-    const itsCart = cart.find((product) => product.id_product === idProduct);
-    if (itsCart) {
-      toast.warn("Ya fue agregada al carrito!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    } else {
-      dispatch(addToCart(idProduct));
-    }
-  };
+  const { AddToCart } = useCart();
 
   const viewImgX = (value) => {
     let valueReturn = value * 3;
@@ -61,8 +47,6 @@ const Detail = () => {
     return valueReturn;
   };
 
-  let d =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
   React.useEffect(() => {
     document
       .getElementById("zoom1")
@@ -72,7 +56,6 @@ const Detail = () => {
     <div className={s.containerG}>
       <NavBar></NavBar>
       <div className={s.containerRoute}>
-        {console.log("resp ", resp)}
         <div className={s.containerRoute__title}>
           <div className="text-xs ">
             <NavLink
@@ -94,7 +77,7 @@ const Detail = () => {
               className={`${s.route}`}
               style={{ fontSize: "14px" }}
             >
-              {resp?.name} {""}{" "}
+              {product?.name} {""}{" "}
             </NavLink>
           </div>
         </div>
@@ -111,13 +94,13 @@ const Detail = () => {
               <div className="imageProduct">
                 <img
                   onMouseMove={handleMouseMove}
-                  src={`${resp?.image}`}
+                  src={`${product?.image}`}
                   alt="picture"
                   className={`${s.mainImage}`}
                 />
                 <div className={s.zoonImage} id="zoom1">
                   <div className={s.zoonImage2}>
-                    <img src={`${resp?.image}`} />
+                    <img src={`${product?.image}`} />
                   </div>
                 </div>
               </div>
@@ -133,41 +116,41 @@ const Detail = () => {
             </div>
             <div className={`${s.detailsContainer} flex flex-col h-full`}>
               <h3 className="text-2xl font-bold text-white w-full text-center mt-10  pt-3 h-16">
-                {resp?.name}
+                {product?.name}
               </h3>
 
               <div className={`p-10 px-14 text-1xl  text-white ${s.pSection}`}>
                 <p>
                   <span>Técnica: </span>
-                  {resp?.technique}
+                  {product?.technique}
                 </p>
                 <p>
-                  <span>Medida : </span> {resp?.measures}
+                  <span>Medida : </span> {product?.measures}
                 </p>
                 <p>
                   <span>Código : </span>
-                  {resp?.sku}
+                  {product?.sku}
                 </p>
                 <p>
                   <span>Año : </span>
-                  {resp?.released}
+                  {product?.released}
                 </p>
 
                 <p>
                   <span>Categoria: </span>{" "}
-                  {resp?.categories?.map((e) => e.name) + " "}
+                  {product?.categories?.map((e) => e.name) + " "}
                 </p>
                 {}
                 <p className="mt-2">
-                  {/* {resp?.description} */}
+                  {/* {product?.description} */}
 
-                  {resp?.description?.length > 56 ? (
+                  {product?.description?.length > 56 ? (
                     <>
-                      {resp?.description?.substring(0, 56)}
+                      {product?.description?.substring(0, 56)}
                       <p className={descriptionText ? s.show : s.hide}>
-                        {resp?.description?.substring(
+                        {product?.description?.substring(
                           56,
-                          resp?.description?.length
+                          product?.description?.length
                         )}
                       </p>
                       <span
@@ -188,7 +171,7 @@ const Detail = () => {
                       </span>
                     </>
                   ) : (
-                    <>{resp?.description}</>
+                    <>{product?.description}</>
                   )}
                 </p>
               </div>
@@ -197,12 +180,12 @@ const Detail = () => {
                 className={`flex items-center justify-between px-8 my-6 mt-0 mb-1 ${s.priceSection} p-4 text-center `}
               >
                 <p className="self-center text-white text-3xl">
-                  $ {resp?.price}.00
+                  $ {product?.price}.00
                 </p>
-                {resp && resp.state === "Available" ? (
+                {product && product.state === "Available" ? (
                   <button
                     className={`${s.button}`}
-                    onClick={() => handleAddToCart(resp?.idProduct)}
+                    onClick={() => AddToCart(product)}
                   >
                     Agregar al carrito
                   </button>
@@ -213,7 +196,7 @@ const Detail = () => {
                       color: "#c9ada7ff",
                       fontSize: "1.5rem",
                       marginRight: "10px",
-                      fontWeight: "bold"
+                      fontWeight: "bold",
                     }}
                   >
                     Pintura Vendida

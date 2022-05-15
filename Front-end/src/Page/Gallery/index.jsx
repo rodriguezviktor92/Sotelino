@@ -1,5 +1,4 @@
 import s from "./gallery.module.css";
-
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -10,23 +9,17 @@ import {
   resetTotalPages,
 } from "../../redux/actions";
 import Cards from "../../components/Cards/Cards";
-import divider from "../../assets/divider.png";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
-import { fetchPaints } from "../../services/get/fetchPaints";
+
+import { usePaints } from "../../hook/usePaints";
 
 const Gallery = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
   const [search, setSearch] = useState("");
 
-  const [galleryPaints, setGalleryPaints] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [loading, setLoading] = useState(false);
-
-  const scrollToEnd = () => {
-    setCurrentPage(currentPage + 1);
-  };
+  const { Paints, scrollToEnd, loading } = usePaints();
 
   window.onscroll = function () {
     if (
@@ -38,23 +31,6 @@ const Gallery = () => {
   };
 
   const [filter, setFilter] = useState(false);
-
-  useEffect(() => {
-    if (currentPage || !galleryPaints.length) {
-      setLoading(true);
-      //dispatch(fetchPaints(currentPage));
-      fetchPaints(currentPage)
-        .then((paints) => {
-          setGalleryPaints(galleryPaints.concat(paints.content));
-        })
-        .catch((error) => {
-          new Error(error);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-  }, [currentPage]);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -117,7 +93,7 @@ const Gallery = () => {
           />
         </div>
 
-        <Cards cards={galleryPaints} />
+        <Cards cards={Paints} />
 
         {loading && (
           <div class="flex justify-center items-center text-2xl">

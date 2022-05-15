@@ -1,18 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
-import { removeToCart } from "../../redux/actions/index";
+import { useSelector } from "react-redux";
 import s from "./summary.module.css";
-import backgroundTitle from "../../assets/background-cart-modal-title.png";
 import buttonRemoveCart from "../../assets/button_cart_remove.png";
 import React from "react";
+import { useCart } from "../../hook/useCart";
 
 function Summary({ openModal, modalState }) {
   const cart = useSelector((state) => state.cart);
   const cartTotal = useSelector((state) => state.cartTotal);
-  const dispatch = useDispatch();
 
-  const handleDeleteToCart = (idProduct) => {
-    dispatch(removeToCart(idProduct));
-  };
+  const { DeleteToCart } = useCart();
 
   return (
     <div
@@ -47,7 +43,14 @@ function Summary({ openModal, modalState }) {
               <span className="font-semibold">{product.price}</span>
             </div>
             <div className="flex col-span-1 justify-end cursor-pointer">
-              <span onClick={() => handleDeleteToCart(product.id_product)}>
+              <span
+                onClick={() =>
+                  DeleteToCart({
+                    id_product: product.id_product,
+                    price: product.price,
+                  })
+                }
+              >
                 <img
                   className="img_remove"
                   src={buttonRemoveCart}

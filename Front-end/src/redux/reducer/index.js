@@ -139,22 +139,27 @@ export default function rootReducer(state = initialState, action) {
         ),
       };
     case ADD_TO_CART:
-      let addProduct = getProduct(action.payload);
-      return {
-        ...state,
-        cart: state.cart.concat(addProduct),
-        cartTotal: state.cartTotal + addProduct.price,
-      };
-    case REMOVE_TO_CART:
-      let removeProduct = getProductCart(action.payload);
       console.log(action.payload);
-      let products = state.cart.filter(
-        (paint) => paint.id_product !== action.payload
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(state.cart.concat(action.payload))
       );
       return {
         ...state,
+        cart: state.cart.concat(action.payload),
+        cartTotal: state.cartTotal + action.payload.price,
+      };
+    case REMOVE_TO_CART:
+      let removeProduct = getProductCart(action.payload);
+
+      let products = state.cart.filter(
+        (paint) => paint.id_product !== action.payload.id_product
+      );
+      localStorage.setItem("cart", JSON.stringify(products));
+      return {
+        ...state,
         cart: products,
-        cartTotal: state.cartTotal - removeProduct.price,
+        cartTotal: state.cartTotal - action.payload.price,
       };
     case "FETCH_CUSTOMERS_SUCCESS":
       return {
