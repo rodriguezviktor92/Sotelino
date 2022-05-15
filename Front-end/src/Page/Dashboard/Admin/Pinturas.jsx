@@ -5,38 +5,19 @@ import ModalPaint from "./ModalPaint";
 import NavAdmin from "./NavAdmin";
 import { getCategories } from "../../../redux/actions/index";
 import ProductModal from "../../../components/ProductModal/ProductModal";
-import { fetchPaints } from "../../../services/get/fetchPaints";
+import { usePaints } from "../../../hook/usePaints";
 
 export default function Pinturas() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalProduct, setmodalProduct] = useState(false);
 
-  const [adminPaints, setAdminPaints] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const { Paints, loading } = usePaints();
 
   function openModalProduct() {
     setmodalProduct(!modalProduct);
   }
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (currentPage || !adminPaints.length) {
-      setLoading(true);
-
-      fetchPaints(currentPage)
-        .then((paints) => {
-          setAdminPaints(adminPaints.concat(paints.content));
-        })
-        .catch((error) => {
-          new Error(error);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-  }, [currentPage]);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -184,7 +165,7 @@ export default function Pinturas() {
                   </tr>
                 </thead>
                 <tbody>
-                  {adminPaints.map((e, index) => (
+                  {Paints.map((e, index) => (
                     <tr
                       key={e.id_product}
                       className=""

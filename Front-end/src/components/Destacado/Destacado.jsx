@@ -1,32 +1,13 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addToCart } from "../../redux/actions";
 import s from "./Destacado.module.css";
-import { toast } from "react-toastify";
+import { useCart } from "../../hook/useCart";
 
 export default function Destacado({ cards }) {
-  const dispatch = useDispatch();
   let Destacado = cards[0];
 
-  const cart = useSelector((state) => state.cart);
+  const { AddToCart } = useCart();
 
-  const handleAddToCart = (idProduct) => {
-    const itsCart = cart.find((product) => product.id_product === idProduct);
-    if (itsCart) {
-      toast.warn("Ya fue agregado al carrito!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    } else {
-      dispatch(addToCart(idProduct));
-    }
-  };
   return (
     <section className="py-20 bg-gray-50">
       <div className="container items-center max-w-6xl px-4 px-10 mx-auto sm:px-20 md:px-32 lg:px-16">
@@ -52,7 +33,7 @@ export default function Destacado({ cards }) {
                   <button
                     className={s.btn}
                     onClick={() => {
-                      handleAddToCart(Destacado.id_product);
+                      AddToCart(Destacado);
                     }}
                   >
                     Agregar al carrito

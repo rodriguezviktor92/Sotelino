@@ -1,22 +1,18 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeToCart } from "../../redux/actions/index";
 import "./CartModal.scss";
 import background from "../../assets/background-cart-modal.png";
 import backgroundTitle from "../../assets/background-cart-modal-title.png";
 import buttonRemoveCart from "../../assets/button_cart_remove.png";
 import Button from "../Button";
 import React from "react";
+import { useCart } from "../../hook/useCart";
 
 function CartModal({ openModal, modalState }) {
   const cart = useSelector((state) => state.cart);
   const cartTotal = useSelector((state) => state.cartTotal);
 
-  const dispatch = useDispatch();
-
-  const handleDeleteToCart = (idProduct) => {
-    dispatch(removeToCart(idProduct));
-  };
+  const { DeleteToCart } = useCart();
 
   return (
     <div
@@ -61,7 +57,14 @@ function CartModal({ openModal, modalState }) {
                 <span className="font-semibold">${product.price}.00</span>
               </div>
               <div className="flex col-span-1 justify-end cursor-pointer">
-                <span onClick={() => handleDeleteToCart(product.id_product)}>
+                <span
+                  onClick={() =>
+                    DeleteToCart({
+                      id_product: product.id_product,
+                      price: product.price,
+                    })
+                  }
+                >
                   <img
                     className="img_remove"
                     src={buttonRemoveCart}

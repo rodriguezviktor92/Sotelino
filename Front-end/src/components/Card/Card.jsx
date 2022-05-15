@@ -1,42 +1,18 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getDetail, addToCart } from "../../redux/actions";
 import s from "./Card.module.css";
-import { toast } from "react-toastify";
+import { useCart } from "../../hook/useCart";
+import { useDispatch } from "react-redux";
 
-export default function Card({
-  name,
-  serie,
-  measures,
-  categories,
-  price,
-  image,
-  idProduct,
-}) {
+export default function Card({ paint }) {
+  const { name, serie, measures, categories, price, image, id_product } = paint;
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
 
-  const handleAddToCart = (idProduct) => {
-    const itsCart = cart.find((product) => product.id_product === idProduct);
-    if (itsCart) {
-      toast.warn("Ya fue agregada al carrito!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    } else {
-      dispatch(addToCart(idProduct));
-    }
-  };
+  const { AddToCart } = useCart();
 
   return (
     <div
-      id={idProduct}
+      id={id_product}
       className={s.card}
       style={{
         background: `url(${image}) no-repeat center center`,
@@ -44,17 +20,13 @@ export default function Card({
       }}
     >
       <div className={s.cardbody}>
-        <Link
-          key={idProduct}
-          onClick={() => dispatch(getDetail(idProduct))}
-          to={`/details/${idProduct}`}
-        >
+        <Link key={id_product} to={`/details/${id_product}`}>
           <h1 className={s.cardtitle}>{name.toUpperCase()}</h1>
         </Link>
         <p className={s.cardsub}>Serie: {serie} </p>
         <p className={s.cardmed}>Medidas: {measures}</p>
         <p className={s.cardcat}>
-			{console.log("categorias card filter", categories)}
+          {console.log("categorias card filter", categories)}
           {categories &&
             categories.map((e, index) => {
               return (
@@ -62,7 +34,7 @@ export default function Card({
                   key={index}
                   style={{ display: "inline-block", margin: "0 2px" }}
                 >
-                  {e.name   || e}
+                  {e.name || e}
                 </p>
               );
             })}
@@ -70,7 +42,7 @@ export default function Card({
         <button
           className={s.cardbtn}
           onClick={() => {
-            handleAddToCart(idProduct);
+            AddToCart(paint);
           }}
         >
           Agregar al carrito
