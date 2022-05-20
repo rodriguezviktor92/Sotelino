@@ -46,12 +46,14 @@ module.exports = {
       };
       if (req.query.name) {
         const { name } = req.query;
+        console.log("name: ", name);
         query.where.name = {
           [Op.iLike]: `%${name.toLowerCase()}%`,
         };
       }
-      if (req.query.category) {
+      if (req.query.category && req.query.category !== "0") {
         const { category } = req.query;
+
         query.include[0].where = {
           id_category: category,
         };
