@@ -19,7 +19,7 @@ const Gallery = () => {
   const categories = useSelector((state) => state.categories);
   const [search, setSearch] = useState("");
 
-  const { Paints, scrollToEnd, loading } = usePaints();
+  const { Paints, scrollToEnd, loading, setName, setCategory } = usePaints();
 
   window.onscroll = function () {
     if (
@@ -46,17 +46,14 @@ const Gallery = () => {
   };
 
   const handleSelect = (e) => {
-    let value = e.target.value;
+    const value = e.target.value;
+    console.log(value);
+
     if (value === "All") {
-      setFilter(false);
-      return dispatch(filterByCategory(value));
+      setCategory(0);
+    } else {
+      setCategory(value);
     }
-    if (value === "MAX" || value === "MIN") {
-      setFilter(true);
-      return dispatch(filterByPrice(value));
-    }
-    dispatch(filterByCategory(value));
-    setFilter(true);
   };
 
   return (
@@ -67,22 +64,22 @@ const Gallery = () => {
           Galeria de obras:
         </h3>
         <div className="flex justify-end mr-24">
-          <p className="mr-8 text-2xl self-center">Filtros:</p>
+          <p className="mr-8 text-2xl self-center">Categorias:</p>
 
           <select
             name="filtros"
             className={`${s.selectInput}`}
             onChange={(e) => handleSelect(e)}
           >
-            <option value="All">All</option>
-            <optgroup label="Categorias">
+            <option value="0">Todas</option>
+            <optgroup label="Categorías">
               {categories?.map((category) => {
-                return <option value={category?.name}>{category?.name}</option>;
+                return (
+                  <option value={category?.id_category}>
+                    {category?.name}
+                  </option>
+                );
               })}
-            </optgroup>
-            <optgroup label="Precio">
-              <option value="MAX">Max-Min</option>
-              <option value="MIN">Min-Max</option>
             </optgroup>
           </select>
           <input
