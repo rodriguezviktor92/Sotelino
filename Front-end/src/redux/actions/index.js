@@ -152,18 +152,6 @@ export const getOrders = (idCustomer) => {
   };
 };
 
-export function filterByCategory(category) {
-  return function (dispatch) {
-    dispatch({ type: "FILTER_BY_CATEGORY", payload: category });
-  };
-}
-
-export function filterByPrice(price) {
-  return function (dispatch) {
-    dispatch({ type: "FILTER_BY_PRICE", payload: price });
-  };
-}
-
 export function addToCart(paint) {
   toast.success("Agregado al carrito", {
     position: "top-right",

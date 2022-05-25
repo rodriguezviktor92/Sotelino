@@ -1,13 +1,7 @@
 import s from "./gallery.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  filterByCategory,
-  filterByPrice,
-  getCategories,
-  searchPaintThatContains,
-  resetTotalPages,
-} from "../../redux/actions";
+import { getCategories, resetTotalPages } from "../../redux/actions";
 import Cards from "../../components/Cards/Cards";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
@@ -41,8 +35,6 @@ const Gallery = () => {
   }, []);
 
   const handleChange = (e) => {
-    //dispatch(searchPaintThatContains(e.target.value));
-    //setSearch(e.target.value);
     setName(e.target.value);
   };
 
