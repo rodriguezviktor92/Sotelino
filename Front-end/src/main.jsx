@@ -6,29 +6,31 @@ import { store } from "../src/redux/store";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Flip } from "react-toastify";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 import "react-toastify/dist/ReactToastify.css";
 // only change commit - change commit - opcion3 -opcion
 ReactDOM.render(
-	<Provider store={store}>
-		<ToastContainer
-			theme='colored'
-			transition={Flip}
-			position='top-right'
-			autoClose={5000}
-			hideProgressBar={false}
-			newestOnTop={false}
-			closeOnClick
-			rtl={false}
-			pauseOnFocusLoss
-			draggable
-			pauseOnHover
-		/>
-		<React.StrictMode>
-			<BrowserRouter>
-					<App />
-			</BrowserRouter>
-		</React.StrictMode>
-	</Provider>,
-	document.getElementById("root")
+  <Provider store={store}>
+    <ToastContainer
+      theme="colored"
+      transition={Flip}
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+    />
+    <React.StrictMode>
+      <BrowserRouter>
+        <ScrollToTop />
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  </Provider>,
+  document.getElementById("root")
 );
