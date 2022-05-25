@@ -41,8 +41,9 @@ const Gallery = () => {
   }, []);
 
   const handleChange = (e) => {
-    dispatch(searchPaintThatContains(e.target.value));
-    setSearch(e.target.value);
+    //dispatch(searchPaintThatContains(e.target.value));
+    //setSearch(e.target.value);
+    setName(e.target.value);
   };
 
   const handleSelect = (e) => {
@@ -93,7 +94,7 @@ const Gallery = () => {
         <Cards cards={Paints} />
 
         {loading && (
-          <div class="flex justify-center items-center text-2xl">
+          <div className="flex justify-center items-center text-2xl">
             Loading...
           </div>
         )}

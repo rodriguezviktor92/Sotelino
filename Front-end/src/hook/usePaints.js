@@ -13,7 +13,7 @@ export function usePaints() {
     if (currentPage || !Paints.length) {
       setLoading(true);
 
-      fetchPaints(currentPage, category)
+      fetchPaints(currentPage, category, name)
         .then((paints) => {
           setPaints(Paints.concat(paints.content));
           setTotalpages(paints.totalPages - 1);
@@ -31,7 +31,7 @@ export function usePaints() {
     if (category !== 0) {
       setCurrentPage(0);
       setLoading(true);
-      fetchPaints(0, category)
+      fetchPaints(0, category, name)
         .then((paints) => {
           setPaints(paints.content);
           setTotalpages(paints.totalPages - 1);
@@ -44,6 +44,39 @@ export function usePaints() {
         });
     }
   }, [category]);
+
+  useEffect(() => {
+    console.log(name);
+    if (name) {
+      setCurrentPage(0);
+      setLoading(true);
+      fetchPaints(0, category, name)
+        .then((paints) => {
+          setPaints(paints.content);
+          setTotalpages(paints.totalPages - 1);
+        })
+        .catch((error) => {
+          new Error(error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      setCurrentPage(0);
+      setLoading(true);
+      fetchPaints(0, category, name)
+        .then((paints) => {
+          setPaints(paints.content);
+          setTotalpages(paints.totalPages - 1);
+        })
+        .catch((error) => {
+          new Error(error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  }, [name]);
 
   const scrollToEnd = () => {
     if (currentPage < totalpages) setCurrentPage(currentPage + 1);
