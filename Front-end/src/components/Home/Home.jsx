@@ -26,12 +26,7 @@ export default function Home() {
     (paint) => paint.state === "Available"
   );
   const categories = useSelector((state) => state.categories);
-  const scrollToSection = (sectionref) => {
-    window.scrollTo({
-      top: sectionref.current.offsetTop,
-      behavior: "smooth",
-    });
-  };
+
   const gallery = useRef(null);
   const about = useRef(null);
   const slider = useRef(null);
@@ -40,14 +35,6 @@ export default function Home() {
     dispatch(fetchPaintsHome());
     dispatch(getCategories());
   }, [dispatch]);
-
-  const handleClickPicture = () => {
-    window.location.href = "/gallery";
-  };
-
-  const handleClickAbout = () => {
-    scrollToSection("about");
-  };
 
   return (
     <div className={s.container}>
