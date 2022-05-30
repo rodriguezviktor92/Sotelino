@@ -55,7 +55,7 @@ const Detail = () => {
   return (
     <div className={s.containerG}>
       <NavBar></NavBar>
-      <div className={s.containerRoute}>
+      <div className={`${s.containerRoute} pt-12`}>
         <div className={s.containerRoute__title}>
           <div className="text-xs ">
             <NavLink
@@ -84,10 +84,10 @@ const Detail = () => {
         <div className={s.separator}></div>
       </div>
 
-      <div className={`${s.principalContainer} mt-10`}>
-        <section className="h-170 overflow-hidden" style={{ height: "600px" }}>
+      <div className={`${s.principalContainer} mt-10 py-3`}>
+        <section className="h-170 overflow-hidden">
           <div
-            className={`pt-32 flex justify-around pb-10  ${s.secondContainer} h-full`}
+            className={`pt-32 lg:flex grid justify-around pb-10  ${s.secondContainer} h-full`}
           >
             {console.log(`x: ${x} y: ${y}`)}
             <div className={`${s.containerIMG} `}>
