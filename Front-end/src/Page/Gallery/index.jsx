@@ -52,16 +52,16 @@ const Gallery = () => {
   return (
     <>
       <NavBar />
-      <div className={`text-white pt-24 ${s.container}`}>
-        <h3 className="text-3xl border-b-2 inline-block ml-12">
-          Galeria de obras:
-        </h3>
-        <div className="flex justify-end mr-24">
+      <div className={`grid text-white pt-40 ${s.container}`}>
+        <div className="lg:flex lg:justify-between grid lg:mr-24 p-3">
+          <h3 className="text-3xl border-b-2 inline-block lg:ml-12 ">
+            Galeria de obras:
+          </h3>
           <p className="mr-8 text-2xl self-center">Categorias:</p>
 
           <select
             name="filtros"
-            className={`${s.selectInput}`}
+            className={`${s.selectInput} lg:w-48 lg:mt-2 w-full text-left`}
             onChange={(e) => handleSelect(e)}
           >
             <option value="0">Todas</option>
@@ -76,7 +76,7 @@ const Gallery = () => {
             </optgroup>
           </select>
           <input
-            className={`${s.selectInput2} ml-3`}
+            className={`${s.selectInput2} lg:ml-3 mt-2 w-full lg:w-64`}
             type="text"
             placeholder=" Buscar..."
             onChange={handleChange}
