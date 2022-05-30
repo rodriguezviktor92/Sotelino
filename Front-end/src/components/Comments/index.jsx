@@ -65,7 +65,7 @@ const Comments = () => {
     >
       <div
         id="comments"
-        className={`box-border grid grid-cols-3 mb-30 items-center justify-center px-10 content-center mx-auto leading-6 text-black border-0 border-gray-300 border-solid md:mt-20 xl:mt-0 md:flex-row max-w-7xl lg:px-1 ${s.container}`}
+        className={`box-border grid lg:grid-cols-3 grid-cols-1 mb-30 items-center justify-center px-10 content-center mx-auto leading-6 text-black border-0 border-gray-300 border-solid md:mt-20 xl:mt-0 md:flex-row max-w-7xl lg:px-1 ${s.container}`}
       >
         {comment.map((item, index) => {
           return (
@@ -93,7 +93,7 @@ const Comments = () => {
       </div>
       <Link
         to="/comentarios"
-        style={{ width: "180px", height: "35px", bottom: "-10%", left: "10%" }}
+        style={{ width: "180px", height: "35px", left: "10%" }}
         className=" absolute  bg-white h-8 p-2 rounded-lg mt-5"
       >
         Ver Mas Comentarios

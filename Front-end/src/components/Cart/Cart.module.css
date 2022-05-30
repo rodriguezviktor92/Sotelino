@@ -1,0 +1,6 @@
+.cart {
+  grid-template-areas: "menu";
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}

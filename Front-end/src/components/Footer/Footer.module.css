@@ -1,0 +1,11 @@
+.title {
+  font-size: 4.5rem;
+  font-weight: 600;
+  margin-left: 14px;
+  margin-top: 10px;
+  line-height: 0;
+  position: relative;
+  font-family: "Bilbo", cursive;
+  color: white;
+  bottom: 5px;
+}

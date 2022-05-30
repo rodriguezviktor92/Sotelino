@@ -43,8 +43,8 @@ export default function Home() {
         aboutSection={about}
         sliderSection={slider}
       />
-      <div className={s.banner}>
-        <div className={s.banner__img}>
+      <div className={`${s.container} grid justify-center items-center`}>
+        <div className={`${s.banner__img} ${s.overlap}`}>
           <img
             src={fondoSotelino}
             className={s.banner__img_fondo}
@@ -52,33 +52,22 @@ export default function Home() {
           />
           <img src={sotelino} className={s.banner__img_sotelino} alt="autor" />
         </div>
-        <div className={s.banner__text}>
-          <h1>Hola, soy Hugo Sotelino</h1>
-          <p>
-            Un artista enfocado a pintar cuadros de paisaje y naturaleza, te
-            invito a ver mis obras en la siguentes secciones.{" "}
-          </p>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              flexWrap: "wrap",
-              marginTop: "50px",
-            }}
-          >
+        <div className={`${s.overlap} z-10 grid justify-center items-center`}>
+          <h1 className="lg:text-6xl sm:text-3xl text-3xl text-center font-semibold text-white">
+            Hola, soy Hugo Sotelino
+          </h1>
+          <div className="flex justify-center">
+            <p className="lg:text-3xl text-2xl text-center lg:px-20 text-white w-1/2">
+              Un artista enfocado a pintar cuadros de paisaje y naturaleza, te
+              invito a ver mis obras en la siguentes secciones.{" "}
+            </p>
+          </div>
+          <div className="grid justify-center mt-5">
             <div className={s.banner__text_scrol}>
               <ArrowDown />
             </div>
             <Link to="/home">
-              <p
-                style={{
-                  color: "white",
-                  fontFamily: "mulish",
-                  fontSize: "0.87rem",
-                }}
-              >
-                Ver mas
-              </p>
+              <p className="text-white text-sm">Ver mas</p>
             </Link>
           </div>
         </div>

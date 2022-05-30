@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import style from "./Footer.module.css";
 
 export default function Footer() {
   //returns a footer component with social media adress telephone and terms of use a link to the about page and a link to help page
@@ -8,24 +9,11 @@ export default function Footer() {
       className="w-auto p-4 bottom-0 h-auto relative divide-y-2  border-gray-200"
       style={{ color: "white", marginBottom: "20px" }}
     >
+      <span className={style.title}>Sotelino</span>
       <div className="lg:flex  lg:mt-3 md:mx-12 lg:mx-28 lg:justify-between ">
-        <div className="mb-4 lg:columns-1 w-96">
-          <p className="ml-48" style={{ fontSize: "24px", fontWeight: "bold" }}>
-            Art
-            <label
-              style={{
-                fontSize: "38px",
-                fontWeight: "bold",
-                color: "rgb(0, 173, 173)",
-              }}
-            >
-              .
-            </label>
-            Gallery
-          </p>
+        <div className="lg:flex grid grid-cols-2 mb-4 lg:columns-1 w-96">
           <Link
             style={{
-              marginLeft: "50px",
               textDecoration: "underline",
               fontSize: "14px",
               color: "white",
@@ -98,7 +86,7 @@ export default function Footer() {
               </Link>
             </p>
           </div>
-          <div className="flex">
+          <div className="flex justify-between">
             <p
               style={{
                 fontSize: "16px",

@@ -80,26 +80,26 @@ export default function NavBar({ gallerySection, aboutSection }) {
 
   return (
     <nav
-      className={`flex items-center justify-between flex-wrap p-2 fixed w-screen z-10 w-full ${
+      className={`flex items-center justify-between flex-wrap p-2 fixed w-screen z-20 w-full ${
         background && s.background
       } ${show ? s.active : s.hidden}`}
     >
-      <div className="flex items-center flex-shrink-0 text-white mr-6">
+      <div className="sm:block hidden flex items-center flex-shrink-0 text-white mr-6">
         <span className={s.title}>Sotelino</span>
       </div>
-      <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+      <div className="lg:w-full block flex-grow lg:flex lg:items-center">
         <div className="text-sm lg:flex-grow"></div>
-        <div className="flex justify-center items-center content-center">
+        <div className="lg:flex grid grid-cols-3 justify-center items-center content-center text-center">
           <Link
             to="/home"
-            className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-12"
+            className="block lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-12"
           >
             Inicio
           </Link>
           {isAdmin ? (
             <Link
               to="/dashboard#admin"
-              className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-12"
+              className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-12"
             >
               Panel
             </Link>
@@ -109,7 +109,7 @@ export default function NavBar({ gallerySection, aboutSection }) {
             smooth
             to="/home#gallery"
             className="block mt-4 lg:inline-block lg:mt-0 text-gray-200
-            	hover:text-white mr-12 pointer"
+            	hover:text-white lg:mr-12 pointer"
           >
             Obras
           </HashLink>
@@ -117,20 +117,20 @@ export default function NavBar({ gallerySection, aboutSection }) {
           <HashLink
             smooth
             to="/home#about"
-            className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-12 pointer"
+            className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-12 pointer"
           >
             Sobre mi
           </HashLink>
           <Link
             to="/comentarios"
-            className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-12 pointer"
+            className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-12 pointer"
           >
             Comentarios
           </Link>
           {!localStorage.getItem("token") ? (
             <Link
               to="/login"
-              className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-12"
+              className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white lg:mr-12"
             >
               Iniciar sesion
             </Link>
