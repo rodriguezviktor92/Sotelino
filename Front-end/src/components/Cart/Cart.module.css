@@ -2,5 +2,9 @@
   grid-template-areas: "menu";
   justify-content: center;
   background-repeat: no-repeat;
-  background-position: bottom;
+  background-size: 32px;
+}
+
+.overlap {
+  grid-area: menu;
 }

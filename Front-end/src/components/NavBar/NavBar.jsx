@@ -84,10 +84,10 @@ export default function NavBar({ gallerySection, aboutSection }) {
         background && s.background
       } ${show ? s.active : s.hidden}`}
     >
-      <div className="sm:block hidden flex items-center flex-shrink-0 text-white mr-6">
+      <div className="self-end sm:block hidden flex items-center flex-shrink-0 text-white mr-6">
         <span className={s.title}>Sotelino</span>
       </div>
-      <div className="lg:w-full block flex-grow lg:flex lg:items-center">
+      <div className="block flex-grow lg:flex lg:items-center">
         <div className="text-sm lg:flex-grow"></div>
         <div className="lg:flex grid grid-cols-3 justify-center items-center content-center text-center">
           <Link
