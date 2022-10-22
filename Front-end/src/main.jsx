@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider } from "react-redux";
 import { store } from "../src/redux/store";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Flip } from "react-toastify";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
@@ -25,12 +25,10 @@ ReactDOM.render(
       draggable
       pauseOnHover
     />
-    <React.StrictMode>
-      <BrowserRouter>
-        <ScrollToTop />
-        <App />
-      </BrowserRouter>
-    </React.StrictMode>
+    <Router>
+      <ScrollToTop />
+      <App />
+    </Router>
   </Provider>,
   document.getElementById("root")
 );
