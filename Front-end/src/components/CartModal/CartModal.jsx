@@ -21,7 +21,7 @@ function CartModal({ openModal, modalState }) {
       }`}
     >
       <div
-        className="cartContainer grid grid-cols-1 grid-rows-5 p-6 bg-white relative h-64 rounded-3xl justify-end text-white bg-no-repeat bg-cover"
+        className="cartContainer lg:h-4/5 lg:w-2/4 w-full h-full grid grid-cols-1 grid-rows-5 p-6 bg-white relative rounded-3xl justify-end text-white bg-no-repeat bg-cover"
         style={{ backgroundImage: `url(${background})` }}
       >
         <div className="flex col-span-7 justify-between">
@@ -76,13 +76,13 @@ function CartModal({ openModal, modalState }) {
           ))}
         </div>
         <div className="grid gap-y-4 grid-cols-7">
-          <div className="grid col-start-6 col-span-2">
+          <div className="grid lg:col-start-6 col-span-2">
             <div className="flex justify-between font-semibold">
               <span>Total: </span>
               <span>${cartTotal}.00</span>
             </div>
           </div>
-          <div className="col-start-6 col-span-2">
+          <div className="lg:col-start-6 col-start-4 col-span-2">
             <Link to="/payment">
               {" "}
               <Button

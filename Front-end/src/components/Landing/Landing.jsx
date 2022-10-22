@@ -26,7 +26,7 @@ export default function Landing() {
                 <div className="relative flex flex-col sm:flex-row sm:space-x-4">
                   <Link
                     to="/home"
-                    className="flex items-center w-full px-6 py-3 mb-3 text-lg text-black	 bg-gray-200 rounded-md sm:mb-0 hover:bg-gray-300 sm:w-auto"
+                    className="flex justify-center items-center w-full px-6 py-3 mb-3 text-lg text-black	 bg-gray-200 rounded-md sm:mb-0 hover:bg-gray-300 sm:w-auto"
                   >
                     Ingresar
                     <svg
@@ -45,7 +45,7 @@ export default function Landing() {
                   </Link>
                   <Link
                     to="/faq"
-                    className="flex items-center px-6 py-3 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600"
+                    className="flex justify-center items-center px-6 py-3 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600"
                   >
                     Saber más
                   </Link>

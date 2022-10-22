@@ -1,15 +1,22 @@
 import { useSelector } from "react-redux";
 import cartImage from "../../assets/shopping-cart.png";
+import style from "./Cart.module.css";
+
 function Cart({ openModal }) {
   const cart = useSelector((state) => state.cart);
 
   return (
-    <div className="grid">
-      <div className="z-10 grid cursor-pointer p-6" onClick={openModal}>
-        <span className="static -mb-6 z-10 place-self-center text-white">
+    <div
+      className={`grid p-3 z-10 col-start-3 ${style.cart} bg-center`}
+      onClick={openModal}
+    >
+      <div className={`grid self-end justify-center ${style.overlap}`}>
+        <p className="static z-10 place-self-center text-white">
           {cart.length ? cart.length : null}
-        </span>
-        <img src={cartImage} alt="You Cart" className="-mt-2" />
+        </p>
+      </div>
+      <div className={`z-10 grid cursor-pointer ${style.overlap}`}>
+        <img src={cartImage} alt="You Cart" className="" />
       </div>
     </div>
   );
